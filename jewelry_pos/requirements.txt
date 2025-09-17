@@ -10,6 +10,7 @@ Django==5.2.6
 django-cors-headers==4.8.0
 djangorestframework==3.16.1
 djangorestframework-csv==3.0.2
+gunicorn==23.0.0
 h11==0.16.0
 idna==3.10
 jmespath==1.0.1
