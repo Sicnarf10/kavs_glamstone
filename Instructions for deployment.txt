@@ -1,0 +1,19 @@
+Instructions:
+========================
+
+Here is the deployment package for the Jewelry POS application.
+
+Unzip the file.
+
+Upload the contents of the backend folder to the server's root directory.
+
+Upload the contents of the frontend folder to the server's public_html directory.
+
+In the Hostinger panel, go to "Setup Python App" and create an application pointing to the backend folder.
+
+Install the dependencies using the requirements.txt file.
+
+Configure the passenger_wsgi.py file to start the application.
+
+Let me know if you have any questions. Thanks!
+
