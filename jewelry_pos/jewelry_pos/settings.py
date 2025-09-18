@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-cq027(*_*hihc0&-sm$6qtw5@29=rkys!q938mi=^44snzv@92'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False 
+DEBUG = True 
 
 ALLOWED_HOSTS = [
     'kavs-glamstone.onrender.com',  # Your Render backend
