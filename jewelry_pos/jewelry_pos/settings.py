@@ -25,7 +25,15 @@ SECRET_KEY = 'django-insecure-cq027(*_*hihc0&-sm$6qtw5@29=rkys!q938mi=^44snzv@92
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False 
 
-ALLOWED_HOSTS = ['letzbrand.com','https://kavsglamstone.netlify.app/']
+ALLOWED_HOSTS = [
+    'kavs-glamstone.onrender.com',  # Your Render backend
+    'kavsglamstone.netlify.app',    # Your Netlify frontend
+]
+
+# Get the Render external hostname from the environment variable just in case
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 
 # Application definition
@@ -128,6 +136,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
+    "https://kavsglamstone.netlify.app", # Your Netlify frontend
 ]
 
 # --- Add this at the very bottom of the file ---
