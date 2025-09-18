@@ -69,7 +69,7 @@ function POS() {
 
   const fetchItems = async () => {
     try {
-      const response = await fetch('/api/items/');
+      const response = await fetch('${import.meta.env.VITE_API_URL}/api/items/');
       const data = await response.json();
       setInventory(data.filter(item => item.stock_status === 'IN_STOCK'));
     } catch (error) { console.error("Error fetching inventory:", error); }
@@ -94,7 +94,7 @@ function POS() {
           price_at_sale: item.selling_price,
         })),
       };
-      const transactionResponse = await fetch('/api/transactions/', {
+      const transactionResponse = await fetch('${import.meta.env.VITE_API_URL}/api/transactions/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(transactionData),

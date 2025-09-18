@@ -33,7 +33,7 @@ function Inventory() {
 
   const fetchItems = async () => {
     try {
-      const response = await fetch('/api/items/');
+      const response = await fetch('${import.meta.env.VITE_API_URL}/api/items/');
       if (!response.ok) throw new Error('Network response was not ok');
       const data = await response.json();
       setInventory(data);
@@ -71,7 +71,7 @@ function Inventory() {
 
   const handleItemClick = async (itemId) => {
     try {
-      const response = await fetch(`/api/items/${itemId}/`);
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/items/${itemId}/`);
       const data = await response.json();
       setSelectedItem(data);
       setIsModalOpen(true);
@@ -113,7 +113,7 @@ function Inventory() {
         .map(id => inventory.find(item => item.id === id)?.item_id)
         .filter(Boolean);
 
-      const response = await fetch('/api/barcodes/bulk-export/', {
+      const response = await fetch('${import.meta.env.VITE_API_URL}/api/barcodes/bulk-export/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ item_ids: itemIdsToExport }),
@@ -170,7 +170,7 @@ function Inventory() {
     if (imageFile) submissionData.append('image', imageFile);
 
     try {
-      const response = await fetch('/api/items/create/', { method: 'POST', body: submissionData });
+      const response = await fetch('${import.meta.env.VITE_API_URL}/api/items/create/', { method: 'POST', body: submissionData });
       if (!response.ok) throw new Error(JSON.stringify(await response.json()));
       const result = await response.json();
       setMessage(`Success! ${result.length} item(s) were added.`);
@@ -320,7 +320,7 @@ function Inventory() {
               <p><strong>Date Added:</strong> {new Date(selectedItem.added_date).toLocaleDateString()}</p>
               <div className="modal-barcode-section">
                 <h4>Barcode</h4>
-                <img className="barcode-image" src={`/api/barcode/${selectedItem.item_id}/`} alt={`Barcode for ${selectedItem.item_id}`} />
+                <img className="barcode-image" src={`${import.meta.env.VITE_API_URL}/api/barcode/${selectedItem.item_id}/`} alt={`Barcode for ${selectedItem.item_id}`} />
                 <button className="print-btn" onClick={handlePrint}>Print Barcode</button>
               </div>
             </div>
