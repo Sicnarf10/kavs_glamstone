@@ -117,8 +117,11 @@ STORAGES = {
     }
 }
 
+WHITENOISE_IGNORE_MISSING_FILES = True
+
 # Legacy settings for compatibility with cloudinary_storage
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 
@@ -139,6 +142,7 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 CORS_ALLOW_CREDENTIALS = True
+    
 
 # Media files
 MEDIA_URL = '/media/'
