@@ -84,6 +84,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'jewelry_pos.wsgi.application'
 
+# This tells WhiteNoise not to crash if it can't find an obscure admin file.
+WHITENOISE_MANIFEST_STRICT = False
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
@@ -187,8 +189,8 @@ REST_FRAMEWORK = {
 }
 
 
-# This is required by the cloudinary_storage library for the collectstatic command
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+# # This is required by the cloudinary_storage library for the collectstatic command
+# STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 
 STORAGES = {
