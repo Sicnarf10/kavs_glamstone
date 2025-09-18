@@ -1,0 +1,5 @@
+{
+  "categories": ["Ring", "Bangle", "Necklace", "Earring", "Pendant", "Bracelet"],
+  "styles": ["Traditional", "Modern", "Antique", "Korean"],
+  "materials": ["Teracota", "Plastic", "Glass"]
+}
