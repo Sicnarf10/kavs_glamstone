@@ -14,7 +14,7 @@ function Dashboard() {
 
   const fetchMetrics = async (start = '', end = '') => {
     setLoading(true);
-    let url = 'http://127.0.0.1:8000/api/metrics/';
+    let url = '/api/metrics/';
     if (start && end) {
       url += `?start_date=${start}&end_date=${end}`;
     }
@@ -61,7 +61,7 @@ function Dashboard() {
     }
   };
   
-  const downloadUrl = `http://127.0.0.1:8000/api/metrics/?start_date=${startDate}&end_date=${endDate}&format=csv`;
+  const downloadUrl = `/api/metrics/?start_date=${startDate}&end_date=${endDate}&format=csv`;
 
   return (
     <div className="dashboard-container">
