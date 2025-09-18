@@ -166,6 +166,9 @@ REST_FRAMEWORK = {
     ),
 }
 
+# This is required by the cloudinary_storage library for the collectstatic command
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
 
 STORAGES = {
     "default": {
