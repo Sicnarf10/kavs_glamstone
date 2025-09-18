@@ -87,6 +87,7 @@ WSGI_APPLICATION = 'jewelry_pos.wsgi.application'
 # This tells WhiteNoise not to crash if it can't find an obscure admin file.
 WHITENOISE_MANIFEST_STRICT = False
 
+
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
