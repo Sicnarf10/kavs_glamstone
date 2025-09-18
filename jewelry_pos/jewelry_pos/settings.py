@@ -42,10 +42,10 @@ if RENDER_EXTERNAL_HOSTNAME:
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
-    'cloudinary_storage',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'cloudinary_storage',
     'django.contrib.staticfiles',
     'cloudinary',
     'corsheaders',
@@ -176,21 +176,14 @@ DEFAULT_RENDERER_CLASSES = (
 
 # Only include the BrowsableAPIRenderer when in DEBUG mode (development)
 if DEBUG:
-    DEFAULT_RENDERER_CLASSES = DEFAULT_RENDERER_CLASSES + (
-        'rest_framework.renderers.BrowsableAPIRenderer',
-    )
-
-REST_FRAMEWORK = {
+    DEFAULT_RENDERER_CLASSES += ('rest_framework.renderers.BrowsableAPIRenderer',)
+    REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': DEFAULT_RENDERER_CLASSES,
-    'DEFAULT_PERMISSION_CLASSES': [
-         # We can also set the default permission here
-        'rest_framework.permissions.IsAuthenticated',
-    ]
-}
+    }
 
 
 # # This is required by the cloudinary_storage library for the collectstatic command
-# STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 
 STORAGES = {
