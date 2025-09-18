@@ -122,7 +122,7 @@ input[type="checkbox"] { transform: scale(1.4); margin: 0 10px 0 5px; cursor: po
 .item-cell a { color: var(--link-color); font-weight: bold; text-decoration: none; }
 .item-cell a:hover { text-decoration: underline; }
 .item-image-cell img, .item-image-cell .placeholder-box { width: 60px; height: 60px; object-fit: cover; border-radius: 4px; background-color: #e9ecef; }
-.status-badge { padding: 4px 8px; border-radius: 12px; font-size: 0.8em; color: white; text-transform: capitalize; }
+.status-badge { padding: 4px 8px; font-size: 0.8em; color: white; text-transform: capitalize; }
 .status-in_stock { background-color: var(--success-color); }
 .status-sold { background-color: var(--error-color); }
 .status-reserved { background-color: #ffc107; color: #333; }
