@@ -173,6 +173,7 @@ MEDIA_URL = '/media/'
 
 DEFAULT_RENDERER_CLASSES = (
     'rest_framework.renderers.JSONRenderer',
+    'rest_framework_csv.renderers.CSVRenderer',
 )
 
 # Only include the BrowsableAPIRenderer when in DEBUG mode (development)
