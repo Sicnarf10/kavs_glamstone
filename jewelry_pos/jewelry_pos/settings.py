@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-cq027(*_*hihc0&-sm$6qtw5@29=rkys!q938mi=^44snzv@92'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True 
+DEBUG = False 
 
 ALLOWED_HOSTS = [
     'kavs-glamstone.onrender.com',  # Your Render backend
@@ -42,10 +42,12 @@ if RENDER_EXTERNAL_HOSTNAME:
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
+    'cloudinary_storage',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cloudinary',
     'corsheaders',
     'rest_framework', # Add this
     'inventory',      # Add this
@@ -154,7 +156,7 @@ CORS_ALLOWED_ORIGINS = [
 # This defines the URL path to access media files
 MEDIA_URL = '/media/'
 # This defines the physical folder on your computer where files will be saved
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': (
@@ -164,8 +166,20 @@ REST_FRAMEWORK = {
     ),
 }
 
+
 STORAGES = {
+    "default": {
+        # Use Cloudinary for all default file storage (i.e., your ImageFields)
+        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+    },
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
+}
+
+# --- NEW SECTION for Cloudinary Configuration ---
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET')
 }
