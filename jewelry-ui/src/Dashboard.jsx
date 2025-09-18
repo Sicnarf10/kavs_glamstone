@@ -14,7 +14,7 @@ function Dashboard() {
 
   const fetchMetrics = async (start = '', end = '') => {
     setLoading(true);
-    let url = '${import.meta.env.VITE_API_URL}/api/metrics/';
+    let url = `${import.meta.env.VITE_API_URL}/api/metrics/`;
     if (start && end) {
       url += `?start_date=${start}&end_date=${end}`;
     }
