@@ -4,7 +4,6 @@ import { Html5QrcodeScanner } from 'html5-qrcode';
 import appConfig from './config.json';
 import './POS.css';
 
-
 function POS() {
   const [inventory, setInventory] = useState([]);
   const [cart, setCart] = useState([]);

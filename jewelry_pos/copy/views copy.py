@@ -376,19 +376,19 @@ class TransactionDetailView(generics.RetrieveAPIView):
     queryset = Transaction.objects.all()
     serializer_class = TransactionDetailSerializer
 
-# # First, create a more detailed Transaction serializer in inventory/serializers.py
-# class DetailedSaleSerializer(serializers.ModelSerializer):
-#     # Include item name in the sale data
-#     jewelry_item_name = serializers.CharField(source='jewelry_item.name', read_only=True)
-#     class Meta:
-#         model = Sale
-#         fields = ['id', 'jewelry_item_name', 'quantity', 'price_at_sale']
+# First, create a more detailed Transaction serializer in inventory/serializers.py
+class DetailedSaleSerializer(serializers.ModelSerializer):
+    # Include item name in the sale data
+    jewelry_item_name = serializers.CharField(source='jewelry_item.name', read_only=True)
+    class Meta:
+        model = Sale
+        fields = ['id', 'jewelry_item_name', 'quantity', 'price_at_sale']
 
-# class TransactionDetailSerializer(serializers.ModelSerializer):
-#     customer = CustomerSerializer()
-#     sales = DetailedSaleSerializer(many=True) # Use the new detailed sale serializer
-#     class Meta:
-#         model = Transaction
-#         fields = '__all__'
+class TransactionDetailSerializer(serializers.ModelSerializer):
+    customer = CustomerSerializer()
+    sales = DetailedSaleSerializer(many=True) # Use the new detailed sale serializer
+    class Meta:
+        model = Transaction
+        fields = '__all__'
 
 
