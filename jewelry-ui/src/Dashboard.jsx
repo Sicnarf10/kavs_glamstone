@@ -4,6 +4,8 @@ import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import './Dashboard.css';
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 function Dashboard() {
@@ -14,7 +16,7 @@ function Dashboard() {
 
   const fetchMetrics = async (start = '', end = '') => {
     setLoading(true);
-    let url = `${import.meta.env.VITE_API_URL}/api/metrics/`;
+    let url = `${API_URL}/api/metrics/`;
     if (start && end) {
       url += `?start_date=${start}&end_date=${end}`;
     }
@@ -61,7 +63,7 @@ function Dashboard() {
     }
   };
   
-  const downloadUrl = `${import.meta.env.VITE_API_URL}/api/metrics/?start_date=${startDate}&end_date=${endDate}&format=csv`;
+  const downloadUrl = `${API_URL}/api/metrics/?start_date=${startDate}&end_date=${endDate}&format=csv`;
 
   return (
     <div className="dashboard-container">

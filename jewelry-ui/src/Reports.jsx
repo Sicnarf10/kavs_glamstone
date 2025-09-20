@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import './Reports.css'; // We'll create this file next
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 function Reports() {
   const [reportData, setReportData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -9,7 +11,7 @@ function Reports() {
   useEffect(() => {
     const fetchReport = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/inventory-report/`);
+        const response = await fetch(`${API_URL}/api/inventory-report/`);
         const data = await response.json();
         setReportData(data);
       } catch (error) {
@@ -24,7 +26,7 @@ function Reports() {
   return (
     <div className="report-container">
       <h1>Inventory Stock Report</h1>
-      <a href={`${import.meta.env.VITE_API_URL}/api/inventory-report/?format=csv`} className="download-btn" download>
+      <a href={`${API_URL}/api/inventory-report/?format=csv`} className="download-btn" download>
         Download as CSV
       </a>
       {loading ? <p>Loading report...</p> : (

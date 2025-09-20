@@ -2,8 +2,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import appConfig from './config.json';
 
-const server_url = 'http://127.0.0.1:8000';
-// const server_url = `${import.meta.env.VITE_API_URL}`;
 
 function Inventory() {
   const [formData, setFormData] = useState({
@@ -29,6 +27,7 @@ function Inventory() {
 
   // State to track which groups are open for the accordion
   const [openGroups, setOpenGroups] = useState({});
+  const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     fetchItems();
@@ -36,7 +35,7 @@ function Inventory() {
 
   const fetchItems = async () => {
     try {
-      const response = await fetch(`${server_url}/api/items/`);
+      const response = await fetch(`${API_URL}/api/items/`);
       if (!response.ok) throw new Error('Network response was not ok');
       const data = await response.json();
       setInventory(data);
@@ -70,11 +69,11 @@ function Inventory() {
       const calculatedPrice = cost * (1 + margin / 100);
       setFormData(prevData => ({ ...prevData, selling_price: calculatedPrice.toFixed(2) }));
     }
-  }, [formData.cost_price, formData.profit_margin]);
+  }, [formData.cost_price, formData.profit_margin]);  
 
   const handleItemClick = async (itemId) => {
     try {
-      const response = await fetch(`${server_url}/api/items/${itemId}/`);
+      const response = await fetch(`${API_URL}/api/items/${itemId}/`);
       const data = await response.json();
       setSelectedItem(data);
       setIsModalOpen(true);
@@ -116,7 +115,7 @@ function Inventory() {
         .map(id => inventory.find(item => item.id === id)?.item_id)
         .filter(Boolean);
 
-      const response = await fetch(`${server_url}/api/barcodes/bulk-export/`, {
+      const response = await fetch(`${API_URL}/api/barcodes/bulk-export/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ item_ids: itemIdsToExport }),
@@ -173,7 +172,7 @@ function Inventory() {
     if (imageFile) submissionData.append('image', imageFile);
 
     try {
-      const response = await fetch(`${server_url}/api/items/create/`, { method: 'POST', body: submissionData });
+      const response = await fetch(`${API_URL}/api/items/create/`, { method: 'POST', body: submissionData });
       if (!response.ok) throw new Error(JSON.stringify(await response.json()));
       const result = await response.json();
       setMessage(`Success! ${result.length} item(s) were added.`);
@@ -324,7 +323,7 @@ function Inventory() {
               <div className="modal-barcode-section">
                 <h4>Barcode</h4>
                 <img className="barcode-image"
-                  src={`${server_url}/api/barcode/${selectedItem.item_id}/`}
+                  src={`${API_URL}/api/barcode/${selectedItem.item_id}/`}
                   alt={`Barcode for ${selectedItem.item_id}`} />
                 <button className="print-btn" onClick={handlePrint}>Print Barcode</button>
               </div>

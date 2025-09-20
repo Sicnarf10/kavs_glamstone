@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './Receipt.css'; // We will create this new CSS file
 
+const API_URL = import.meta.env.VITE_API_URL;
 
 function ReceiptDetail() {
   const { id } = useParams();
@@ -10,7 +11,7 @@ function ReceiptDetail() {
 
   useEffect(() => {
     if (id) {
-      fetch(`${import.meta.env.VITE_API_URL}/api/transactions/${id}/`)
+      fetch(`${API_URL}/api/transactions/${id}/`)
         .then(res => res.json())
         .then(data => setReceipt(data))
         .catch(error => console.error("Failed to fetch receipt:", error));

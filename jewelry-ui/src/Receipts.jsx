@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Reports.css'; // We can reuse the report table styles
+const API_URL = import.meta.env.VITE_API_URL;
 
 function Receipts() {
   const [transactions, setTransactions] = useState([]);
@@ -9,7 +10,7 @@ function Receipts() {
 
   useEffect(() => {
     // Construct the URL with a search query if a search term exists
-    const url = `${import.meta.env.VITE_API_URL}/api/transactions/list/?search=${searchTerm}`;
+    const url = `${API_URL}/api/transactions/list/?search=${searchTerm}`;
 
     fetch(url)
       .then(res => res.json())

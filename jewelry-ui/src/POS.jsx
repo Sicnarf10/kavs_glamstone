@@ -4,6 +4,7 @@ import { Html5QrcodeScanner } from 'html5-qrcode';
 import appConfig from './config.json';
 import './POS.css';
 
+const API_URL = import.meta.env.VITE_API_URL;
 
 function POS() {
   const [inventory, setInventory] = useState([]);
@@ -78,7 +79,7 @@ function POS() {
 
   const fetchItems = async () => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/items/`);
+      const response = await fetch(`${API_URL}/api/items/`);
       const data = await response.json();
       setInventory(data.filter(item => item.stock_status === 'IN_STOCK'));
     } catch (error) { console.error("Error fetching inventory:", error); }
@@ -103,7 +104,7 @@ function POS() {
   //         price_at_sale: item.selling_price,
   //       })),
   //     };
-  //     const transactionResponse = await fetch(`${import.meta.env.VITE_API_URL}/api/transactions/`, {
+  //     const transactionResponse = await fetch(`${API_URL}/api/transactions/`, {
   //       method: 'POST',
   //       headers: { 'Content-Type': 'application/json' },
   //       body: JSON.stringify(transactionData),
@@ -161,7 +162,7 @@ function POS() {
     };
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/transactions/`, {
+      const response = await fetch(`${API_URL}/api/transactions/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(transactionData),
@@ -337,7 +338,7 @@ function POS() {
             <h2>UPI Checkout</h2>
             <p>Scan the QR code to pay ₹{transactionDetails.grandTotal}</p>
             <div className="qr-code-container">
-              <img src={`${import.meta.env.VITE_API_URL}/api/generate-qr/?upi_id=${appConfig.settings.upi_id}&amount=${transactionDetails.grandTotal}&bill_number=SALE`} alt="UPI QR Code" />
+              <img src={`${API_URL}/api/generate-qr/?upi_id=${appConfig.settings.upi_id}&amount=${transactionDetails.grandTotal}&bill_number=SALE`} alt="UPI QR Code" />
             </div>
             <div className="modal-actions">
               <button className="cancel-btn" onClick={resetSale}>Cancel</button>
