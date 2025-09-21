@@ -26,8 +26,10 @@ urlpatterns = [
     path('', include('inventory.urls')),
 ]
 
-# --- Add this block at the bottom ---
+
+# This serves media files from MEDIA_ROOT during development (DEBUG=True)
 # This is crucial for serving media files during development.
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
 

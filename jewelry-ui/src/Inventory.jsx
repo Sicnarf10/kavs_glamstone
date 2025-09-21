@@ -29,9 +29,7 @@ function Inventory() {
   const [openGroups, setOpenGroups] = useState({});
   const API_URL = import.meta.env.VITE_API_URL;
 
-  useEffect(() => {
-    fetchItems();
-  }, []);
+  useEffect(() => {fetchItems();}, []);
 
   const fetchItems = async () => {
     try {

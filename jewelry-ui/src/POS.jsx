@@ -16,7 +16,7 @@ function POS() {
   const [isScannerOpen, setIsScannerOpen] = useState(false);
   
   // --- NEW STATE for checkout flow ---
-  const [paymentMethod, setPaymentMethod] = useState('Cash');
+  const [paymentMethod, setPaymentMethod] = useState('CASH');
   const [isCashModalOpen, setIsCashModalOpen] = useState(false);
   const [isUpiModalOpen, setIsUpiModalOpen] = useState(false);
   const [amountGiven, setAmountGiven] = useState('');
@@ -138,7 +138,7 @@ function POS() {
         grandTotal: grandTotal.toFixed(2),
     });
 
-    if (paymentMethod === 'Cash') {
+    if (paymentMethod === 'CASH') {
       setIsCashModalOpen(true);
     } else {
       setIsUpiModalOpen(true);
@@ -180,10 +180,16 @@ function POS() {
 
   const handleSendWhatsApp = () => {
     if (!lastTransaction) return;
+    let phoneNumber = lastTransaction.phone.trim();
+    // Check if the number is a 10-digit number and doesn't already start with 91
+    if (phoneNumber.length === 10 && !phoneNumber.startsWith('91')) {
+      phoneNumber = `91${phoneNumber}`; // Prepend the country code for India
+    }
     const receiptUrl = `${window.location.origin}/receipt/${lastTransaction.id}`;
     const messageText = `Thank you for your purchase from Kavs Glamstone! You can view your digital receipt here: ${receiptUrl}`;
     const encodedMessage = encodeURIComponent(messageText);
-    const whatsAppUrl = `https://wa.me/${lastTransaction.phone}?text=${encodedMessage}`;
+    const whatsAppUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+    // const whatsAppUrl = `https://wa.me/${lastTransaction.phone}?text=${encodedMessage}`;
     window.open(whatsAppUrl, '_blank');
   };
 
@@ -239,8 +245,8 @@ function POS() {
           <h2>Sales Cart</h2>
           {/* --- New --- */}
           <div className="payment-method-selector">
-            <button className={paymentMethod === 'Cash' ? 'active' : ''} onClick={() => setPaymentMethod('Cash')}>Cash</button>
-            <button className={paymentMethod === 'Cashless' ? 'active' : ''} onClick={() => setPaymentMethod('Cashless')}>Cashless (UPI)</button>
+            <button className={paymentMethod === 'CASH' ? 'active' : ''} onClick={() => setPaymentMethod('CASH')}>CASH</button>
+            <button className={paymentMethod === 'CASHLESS' ? 'active' : ''} onClick={() => setPaymentMethod('CASHLESS')}>CASHLESS (UPI)</button>
           </div>
           <button className="scan-btn" onClick={() => setIsScannerOpen(true)}>
             📷 Scan Barcode
@@ -310,7 +316,7 @@ function POS() {
       {isCashModalOpen && transactionDetails && (
         <div className="modal-overlay">
           <div className="modal-content">
-            <h2>Cash Checkout</h2>
+            <h2>CASH Checkout</h2>
             <div className="summary-row total"><span>Total to Pay</span><span>₹{transactionDetails.grandTotal}</span></div>
             <div className="cash-input-group">
               <label htmlFor="amount-given">Amount Given by Customer</label>
@@ -335,7 +341,7 @@ function POS() {
       {isUpiModalOpen && transactionDetails && (
         <div className="modal-overlay">
           <div className="modal-content">
-            <h2>UPI Checkout</h2>
+            <h2>CASHLESS (UPI) Checkout</h2>
             <p>Scan the QR code to pay ₹{transactionDetails.grandTotal}</p>
             <div className="qr-code-container">
               <img src={`${API_URL}/api/generate-qr/?upi_id=${appConfig.settings.upi_id}&amount=${transactionDetails.grandTotal}&bill_number=SALE`} alt="UPI QR Code" />
