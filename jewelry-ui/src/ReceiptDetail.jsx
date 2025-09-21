@@ -24,9 +24,10 @@ function ReceiptDetail() {
     <div className="receipt-page-container">
       <div className="receipt-paper">
         <div className="receipt-header">
-          <div className="logo-placeholder-receipt">KV</div>
+          {/* <div className="logo-placeholder-receipt">KV</div> */}
+          <img src="/kavs_glamstone_logo.png" alt="Kavs Glamstone Logo" className="receipt-logo" />
           <h2>Kavs Glamstone</h2>
-          <p>123 Jewel Street, Chennai, TN | +91 99999 88888</p>
+          <p>Plot no 2, First Street, GK Nagar,Guruswamy Nagar Main Road, Angaputhur, Ch - 70</p>
         </div>
         <div className="receipt-info">
           <div><strong>Bill No:</strong> {receipt.bill_number}</div>

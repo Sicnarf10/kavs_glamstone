@@ -9,7 +9,13 @@
   font-family: 'Courier New', Courier, monospace;
 }
 .receipt-header { text-align: center; border-bottom: 2px dashed #ccc; padding-bottom: 15px; margin-bottom: 15px; }
-.logo-placeholder-receipt { font-size: 2.5em; font-weight: bold; color: var(--accent-color); }
+/* .logo-placeholder-receipt { font-size: 2.5em; font-weight: bold; color: var(--accent-color); } */
+/* This new style controls your logo's appearance */
+.receipt-logo {
+  max-width: 150px; /* Adjust the size of your logo */
+  height: auto;
+  margin-bottom: 10px;
+}
 .receipt-header h2 { margin: 5px 0; color: var(--primary-color); }
 .receipt-header p { margin: 0; font-size: 0.9em; }
 .receipt-info { display: flex; justify-content: space-between; margin-bottom: 20px; }
